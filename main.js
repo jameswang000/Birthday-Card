@@ -35,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function openBook() { 
-        prevButton.style.transform = "translateX(-180px)";
-        nextButton.style.transform = "translateX(180px)";
+        prevButton.style.transform = "translateX(-205px)";
+        nextButton.style.transform = "translateX(205px)";
         card.style.transform = "translateX(50%)";
     }
 
@@ -96,15 +96,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function main() {
+    function setupCard() {
         prevButton.addEventListener("click", goPrevPage);
         nextButton.addEventListener("click", goNextPage);
+
         papers.forEach(addPaperEventListeners)
         paper1.addEventListener("transitionend", () => {
             if(turningForwards) {
                 paper1.style.zIndex = 1;
             }
         })
+        prevButton.disabled = true;
+    }
+
+    function main() {
+        setupCard();
     }
 
     main();
