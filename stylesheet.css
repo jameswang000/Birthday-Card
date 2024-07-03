@@ -228,7 +228,7 @@ i {
 
     animation: 5s ease-in-out 1;
     animation-direction: normal;
-    animation-fill-mode: forwards;
+    animation-fill-mode: both;
     animation-name: bloom;
 }
 
@@ -239,12 +239,12 @@ i {
     }
 
     50% { 
-        transform: rotateZ(var(--initial-rotation)) rotate3d(1, -1, 0, 40deg);
+        transform: rotateZ(var(--initial-rotation));
         animation-timing-function: linear;
     }
 
     to {
-        transform: rotateZ(var(--initial-rotation)) rotate3d(1, -1, 0, 1deg);
+        transform: rotateZ(var(--initial-rotation));
         animation-timing-function: ease-out;
     }
 }
@@ -253,36 +253,35 @@ i {
     --initial-rotation: 0deg;
     --x: 0;
     --y: 1;
-    transform: rotateZ(0deg);
-    
+    transform: rotateZ(0deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(2) {
     --initial-rotation: 72deg;
     --x: -0.309;
     --y: 0.951;
-    transform: rotateZ(72deg);
+    transform: rotateZ(72deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(3) {
     --initial-rotation: 144deg;
     --x: -0.809;
     --y: 0.587;
-    transform: rotateZ(144deg);
+    transform: rotateZ(144deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(4) {
     --initial-rotation: 216deg;
     --x: -0.809;
     --y: -0.587;
-    transform: rotateZ(216deg);
+    transform: rotateZ(216deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(5) {
     --initial-rotation: 288deg;
     --x: -0.309;
     --y: -0.951;
-    transform: rotateZ(288deg);
+    transform: rotateZ(288deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .center {
