@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
         paper1.addEventListener("transitionend", () => {
             if(turningForwards) {
                 paper1.style.zIndex = 1;
+                
             }
         })
         prevButton.disabled = true;
