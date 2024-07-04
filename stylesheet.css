@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
 /*
 1. Use a more-intuitive box-sizing model.
 */
@@ -49,6 +52,17 @@ p, h1, h2, h3, h4, h5, h6 {
 ###############END OF CSS RESET ##########################
 #########################################################*/
 
+.pacifico-regular {
+    font-family: "Pacifico", cursive;
+    font-weight: 400;
+    font-style: normal
+}
+
+.patrick-hand-regular {
+    font-family: "Patrick Hand", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
 
 body { 
     height : 100vh;
@@ -59,6 +73,9 @@ body {
 
     font-family: sans-serif;
     background-color: powderblue;
+    /*#D2B48C*/
+    --card-border-color : #eadadd;
+    --card-body-color : white;
 }
 
 .content-container {
@@ -67,7 +84,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border : 1px dashed red;
 }
 
 .card {
@@ -105,6 +121,7 @@ body {
 .front {
     z-index: 1;
     backface-visibility: hidden;
+    transform-style: preserve-3d;
 }
 .back {
     z-index: 0;
@@ -168,49 +185,60 @@ i {
 
 /*Page Content Styling*/
 #f1 {
-    background-color: beige;
+    background-color: var(--card-border-color);
 }
 
 #b1 {
-    background-color: beige;
+    background-color: var(--card-border-color);
 }
 
 #f2 {
-    background-color: beige;
+    background-color: var(--card-border-color);
 }
 
 #b2 {
-    background-color: beige;
+    background-color: var(--card-border-color);
 }
 
 .inner-border {
     width : 90%;
     height : 90%;
-    border : 5px solid black;
-    background-color: beige;
+    border : 3px solid black;
+    background-color: var(--card-body-color);
     display : flex;
     justify-content: center;
     align-items: center;
+    position : absolute;
+    z-index: 1;
+
+    border-radius: 10px;
+}
+
+.flowers-container {
+    width: 100%;
+    height: 100%;
+    position : absolute;
 }
 
 .flower-container {
     display : flex;
     position : absolute;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     justify-content: center;
     align-items: center;
     perspective: 1500px;
+    z-index: 2;
 }
 
-.flower-container:nth-child(1) {
-    left : 6px;
-    top : 10px;
+.flowers-container > .flower-container:nth-child(1)  {
+    left : 0px;
+    top : 0px;
 }
 
-.flower-container:nth-child(2) {
-    bottom : 10px;
-    right : 2px;
+.flowers-container > .flower-container:nth-child(2) {
+    bottom : 0px;
+    right : 0px;
 }
 
 .petal {
@@ -230,55 +258,56 @@ i {
     animation-direction: normal;
     animation-fill-mode: both;
     animation-name: bloom;
+    z-index: 0;
 }
 
 @keyframes bloom {
     from {
-        transform: rotateZ(var(--initial-rotation)) rotate3d(1, -1, 0, 80deg);
+        transform: rotateZ(var(--initial-rotation)) translate3d(0px, 0px, 0) rotate3d(1, -1, 0, 80deg);
         animation-timing-function: ease-in;
     }
 
     50% { 
-        transform: rotateZ(var(--initial-rotation));
+        transform: rotateZ(var(--initial-rotation)) translate3d(0px, 0px, 0);
         animation-timing-function: linear;
     }
 
     to {
-        transform: rotateZ(var(--initial-rotation));
+        transform: rotateZ(var(--initial-rotation)) translate3d(0px, 0px, 0);
         animation-timing-function: ease-out;
     }
 }
 
 .petal:nth-child(1) {
-    --initial-rotation: 0deg;
+    --initial-rotation: calc(0deg + 15deg);
     --x: 0;
     --y: 1;
     transform: rotateZ(0deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(2) {
-    --initial-rotation: 72deg;
+    --initial-rotation: calc(72deg + 15deg);
     --x: -0.309;
     --y: 0.951;
     transform: rotateZ(72deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(3) {
-    --initial-rotation: 144deg;
+    --initial-rotation: calc(144deg + 15deg);
     --x: -0.809;
     --y: 0.587;
     transform: rotateZ(144deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(4) {
-    --initial-rotation: 216deg;
+    --initial-rotation: calc(216deg + 15deg);
     --x: -0.809;
     --y: -0.587;
     transform: rotateZ(216deg) rotate3d(1, -1, 0, 80deg);
 }
 
 .petal:nth-child(5) {
-    --initial-rotation: 288deg;
+    --initial-rotation: calc(288deg + 15deg);
     --x: -0.309;
     --y: -0.951;
     transform: rotateZ(288deg) rotate3d(1, -1, 0, 80deg);
@@ -288,15 +317,92 @@ i {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 40%;
-    height: 40%;
+    width: 20%;
+    height: 20%;
     background-color: #ffff00;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),  /* Soft shadow */
+        0 7px 10px rgba(0, 0, 0, 0.15), /* Medium shadow */
+        0 10px 15px rgba(0, 0, 0, 0.2), /* Strong shadow */
+        inset 0 -2px 4px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border : 1px solid black;
-    opacity: 1;
+    z-index: 1;
 }
 
+p.birthday-title {
+    position: absolute;
+    font-family: "Pacifico";
+    width : 300px;
+    height : 330px;
+    font-size: 72px;
+    color: #716060;
+    text-align: center;
+    z-index: 3;
+    left: calc(50% - 150px);
+    top: calc(50% - 165px);
+}
 
+p.birthday-title > span {
+    color : #c36475;
+}
+
+.vines-container {
+    height : 100%;
+    width : 100%;
+    position : absolute;
+}
+
+.vine {
+    z-index: 0;
+}
+
+.vines-container > .vine:nth-child(1) {
+    position: absolute;
+    z-index : 0;
+    left: -50px;
+    bottom: -50px;
+    transform: scale(0.7);
+
+}
+
+.vines-container > .vine:nth-child(2) {
+    position: absolute;
+    z-index : 0;
+    left: -50px;
+    top: -50px;
+    transform: scale(0.7) rotateX(180deg);
+
+}
+
+.vines-container > .vine:nth-child(3) {
+    position: absolute;
+    z-index : 0;
+    right: -50px;
+    bottom: -50px;
+    transform: scale(0.7) rotateY(180deg);
+
+}
+
+.vines-container > .vine:nth-child(4) {
+    position: absolute;
+    z-index : 0;
+    right: -50px;
+    top: -50px;
+    transform: scale(0.7) rotateX(180deg) rotateY(180deg);
+}
+
+.birthday-letter {
+    position: absolute;
+    font-family: "Patrick Hand";
+    width : 300px;
+    height : 330px;
+    font-size: 20px;
+    text-align: left;
+    z-index: 3;
+    left: calc(50% - 150px);
+    top: calc(50% - 165px);
+}
 
 
