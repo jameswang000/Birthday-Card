@@ -104,14 +104,28 @@ document.addEventListener("DOMContentLoaded", () => {
         paper1.addEventListener("transitionend", () => {
             if(turningForwards) {
                 paper1.style.zIndex = 1;
-                
             }
         })
         prevButton.disabled = true;
     }
 
+    function setupControlPanel() {
+        const controlButtons = document.querySelectorAll(".control-panel-button");
+        controlButtons.forEach((button) => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                button.classList.add("animate");
+                setTimeout(() => {
+                    button.classList.remove("animate");
+                    button.disabled = true;
+                }, 600);
+            })
+        })
+    }
+
     function main() {
         setupCard();
+        setupControlPanel();
     }
 
     main();

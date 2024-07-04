@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 /*
 1. Use a more-intuitive box-sizing model.
@@ -63,6 +65,12 @@ p, h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     font-style: normal;
 }
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 body { 
     height : 100vh;
@@ -426,11 +434,189 @@ p.birthday-title > span {
 }
 
 .control-panel-button {
-    border : 3px solid black;
+    position : relative;
+    border : none;
     border-radius : 10px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     width : 100px;
     height: 60%;
-    background-color: lightcoral;
+    background-color: #7d2ae8;
+    color : white;
+
+    cursor : pointer;
+    transition : transform 0.2s ease; 
     
+    font-family: "Poppins";
+    font-size: 18px;
+
+}
+
+.control-panel-button:enabled:active {
+    transform: scale(0.96);
+}
+
+.control-panel-button::before, 
+.control-panel-button::after {
+    content : "";
+    position : absolute;
+    left : 50%;
+    transform : translateX(-50%);
+
+    height : 100%;
+    width : 150%;
+    background-repeat : no-repeat;
+}
+
+.control-panel-button.animate::before {
+    top: -70%;
+    background-image: 
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, #7d2ae8 20%, transparent 30%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+        radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-size: 10% 10%, 20% 20%, 15% 15%, 20% 20%, 18% 18%, 10% 10%, 15% 15%,
+      10% 10%, 18% 18%;
+    animation: topBubbles 0.6s ease-in-out forwards;
+}
+
+@keyframes topBubbles {
+    0% {
+      background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,
+        40% 90%, 55% 90%, 70% 90%;
+    }
+    50% {
+      background-position: 0% 80%, 0% 20%, 10% 40%, 20% 0%, 30% 30%, 22% 50%,
+        50% 50%, 65% 20%, 90% 30%;
+    }
+    100% {
+      background-position: 0% 70%, 0% 10%, 10% 30%, 20% -10%, 30% 20%, 22% 40%,
+        50% 40%, 65% 10%, 90% 20%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+}
+
+.control-panel-button.animate::after {
+    bottom: -70%;
+    background-image: radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, transparent 10%, #7d2ae8 15%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%),
+      radial-gradient(circle, #7d2ae8 20%, transparent 20%);
+    background-size: 15% 15%, 20% 20%, 18% 18%, 20% 20%, 15% 15%, 20% 20%, 18% 18%;
+    animation: bottomBubbles 0.6s ease-in-out forwards;
+  }
+  @keyframes bottomBubbles {
+    0% {
+      background-position: 10% -10%, 30% 10%, 55% -10%, 70% -10%, 85% -10%,
+        70% -10%, 70% 0%;
+    }
+    50% {
+      background-position: 0% 80%, 20% 80%, 45% 60%, 60% 100%, 75% 70%, 95% 60%,
+        105% 0%;
+    }
+    100% {
+      background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+        110% 10%;
+      background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+    }
+  }
+
+.control-panel-button:disabled {
+    opacity : 0.2;
+    transition : 0.2s;
+}
+
+/*Party Design*/
+.party-container {
+    position : absolute;
+    height: auto;
+    width : auto;
+    left : 15%;
+    top : 10%;
+    right : 15%;
+    bottom : 25%;
+    background-color: gray;
+    z-index : 3;
+}
+/*Cake Design*/
+
+
+.cake-container {
+    z-index: 3;
+    --sakura : #FFC0CB;
+    --cake-bottom : 80px;
+}
+
+.plate { 
+    position : absolute;
+
+    width : auto;
+    height: 100px;
+
+    left : 10px;
+    right : 10px;
+    bottom: 30px;
+    
+    background-color: white;
+    border-radius: 50%;
+
+    z-index : 0;
+
+    box-shadow:
+        0 2px 0 #b3b3b3,
+        0 4px 0 #b3b3b3,
+        0 6px 10px rgba(0, 0, 0, 0.2);
+}
+    
+.layer {
+    position: absolute;
+
+    width : auto;
+    height : 90px;
+    
+    left : 40px;
+    right : 40px;
+
+    background-color: var(--sakura);
+    border-radius: 50%;
+
+    box-shadow:
+        0 2px 0px #FFCDD4,
+        0 4px 0px #E6AAB5,
+        0 6px 0px #E6A7B2,
+        0 8px 0px #E6A5B0,
+        0 10px 0px #E6A2AD,
+        0 12px 0px #E69FAB,
+        0 14px 0px #E69DA8,
+        0 16px 0px #E69AA6,
+        0 18px 0px #E698A3,
+        0 20px 0px #E695A1,
+        0 22px 0px #E6929E,
+        0 24px 0px #E6909C,
+        0 26px 0px #E68D99,
+        0 28px 0px #E68B97,
+        0 30px 0px #E68894,
+        0 32px 5px rgba(0, 0, 0, 0.25);
+}
+
+.layer1 {
+    bottom: calc(var(--cake-bottom) + 33px * 0);
+    z-index : 1;
+}
+
+.layer2 {
+    bottom: calc(var(--cake-bottom) + 33px * 1);
+    z-index : 2;
+}
+
+.layer3 {
+    bottom : calc(var(--cake-bottom) + 33px * 2);
+    z-index : 3;
 }
