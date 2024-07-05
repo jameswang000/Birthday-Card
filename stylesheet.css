@@ -544,16 +544,138 @@ p.birthday-title > span {
     bottom : 25%;
     background-color: gray;
     z-index : 3;
+    border-radius: 10px;
 }
+
+/*Balloons Design*/
+.balloons-container {
+    position : absolute;
+    top : 0px;
+    width : 100%; 
+    height : 200px;
+    z-index : 2;
+}
+
+.balloon {
+    position : absolute;
+    height : 60%;
+    width : 20%;
+
+    animation : bobUpAndDown 10s ease-in-out alternate infinite both  
+}
+
+@keyframes bobUpAndDown {
+    from {
+        transform : translateY(var(--y1)) translateX(var(--x1));
+    }
+
+    25% {
+        transform : translateY(var(--y2)) translateX(var(--x2));
+    }
+
+    50% {
+        transform : translateY(var(--y3)) translate(var(--x3));
+    }
+
+    75% {
+        transform : translateY(var(--y4)) translateX(var(--x4));
+    }
+
+    to {
+        transform : translateY(var(--y5)) translateX(var(--x5));
+    }
+}
+
+.balloon-1 {
+    left : 10px;
+    top : 15px;
+}
+
+.balloon-2 {
+    left : 120px;
+    top : 30px;
+}
+
+.balloon-3 {
+    right : 20px;
+    top : 15px;
+}
+
+.balloon-head {
+    position : absolute;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.8), rgba(255,255,255,0) 70%), 
+                radial-gradient(circle at 0% 0%, rgba(255,255,255,0.8), rgba(255,255,255,0) 40%), 
+                radial-gradient(circle at 100% 0%, rgba(255,255,255,0.8), rgba(255,255,255,0) 50%),
+                radial-gradient(circle at 50% 100%, #FF4081, #E91E63);
+
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2), 
+                inset 0px 0px 5px 1px rgba(0,0,0,0.25);
+
+    height : 50%;
+    width : auto;
+
+    left : 10%;
+    right : 10%;
+    border-radius: 50%;
+}
+
+.balloon-head:after {
+    content : "";
+    position : absolute;
+    width : auto;
+
+    bottom : -4px;
+    border : 5px solid transparent;
+    border-color : transparent transparent #E91E63 transparent;
+
+    left : 30%;
+    right : 30%;
+    z-index: 1;
+}
+
+.balloon-string {
+    height : 50%;
+    width : 100%;
+    position: absolute;
+    bottom: 0px;
+
+    animation : swoosh-around 3s linear alternate infinite both;
+}
+
+@keyframes swoosh-around {
+    from {
+        transform : rotate(var(--ang1));
+    }
+    25% {
+        transform : rotate(var(--ang2));
+    }
+    50% {
+        transform : rotate(var(--ang3));
+    }
+    75% {
+        transform : rotate(var(--ang4));
+    }
+    to {
+        transform : rotate(var(--ang5));
+    }
+
+}
+
+.balloon-string > svg {
+    height : 120%;
+    width : 100%;
+}
+
 /*Cake Design*/
-
-
-.cake-container {
-    z-index: 3;
+.cake-container {    
+    width : 100%;
+    height : 100%;
+    position : relative;
     --cake-color : #FFC0CB;
     --icing-color : #98FF98;
     --candle-color : #FFA07A;
     --cake-bottom : 80px;
+    z-index : 3;
 }
 
 .plate { 
@@ -611,6 +733,23 @@ p.birthday-title > span {
 .layer1 {
     bottom: calc(var(--cake-bottom) + 33px * 0);
     z-index : 1;
+    box-shadow:
+        0 2px 0px #FFCDD4,
+        0 4px 0px #E6AAB5,
+        0 6px 0px #E6A7B2,
+        0 8px 0px #E6A5B0,
+        0 10px 0px #E6A2AD,
+        0 12px 0px #E69FAB,
+        0 14px 0px #E69DA8,
+        0 16px 0px #E69AA6,
+        0 18px 0px #E698A3,
+        0 20px 0px #E695A1,
+        0 22px 0px #E6929E,
+        0 24px 0px #E6909C,
+        0 26px 0px #E68D99,
+        0 28px 0px #E68B97,
+        0 30px 0px #E68894,
+        0 40px 10px rgba(0, 0, 0, 0.25);
 }
 
 .layer2 {
@@ -670,7 +809,6 @@ p.birthday-title > span {
 
     bottom : calc(var(--cake-bottom) + 33px * 2 + 3px);
 
-    border : 3px solid red;
     z-index: 6;
 }
 
@@ -684,6 +822,10 @@ p.birthday-title > span {
     left : calc(50%);
     bottom : calc(50%);
     z-index: 0;
+
+    box-shadow: inset 0px 0px 1px rgb(0, 0, 0.5);
+
+    color : white;
 }
 
 .candle::before {
@@ -719,7 +861,7 @@ p.birthday-title > span {
     top: -12px;
     left: 50%;
 
-    z-index: 2;
+    z-index: 1;
 
 
     border-radius: 50% 50% 35% 35%;
@@ -727,39 +869,247 @@ p.birthday-title > span {
     transform: translateX(-50%);
     background: rgba(0, 133, 255, 0.7);
     box-shadow: 0 -2px 3px 0 #dc8a0c, 0 2px 3px 0 #dc8a0c,
-        inset 1px 0 1px 0 rgba(255, 255, 255, .6), 
-        inset -1px 0 1px 0 rgba(255, 255, 255, .6);
+        inset 3px 0 2px 0 rgba(0, 133, 255, 0.6), 
+        inset -3px 0 2px 0 rgba(0, 133, 255, 0.6);
 
     /*inset 3px 0 2px 0 rgba(0, 133, 255, .6), 
         inset -3px 0 2px 0 rgba(0, 133, 255, .6);*/
 }
 
-.blinking-glow {
-    display : none;
-    width: 100px;
-    height: 180px;
+.blue-glow:before {
+    content : "";
+    position : absolute;
+    width: 80%;
+    height: 80%;
     left: 50%;
-    top: -55%;
     transform: translateX(-50%);
+    bottom: 0;
     border-radius: 50%;
-    background: #ff6000;
-  
-    filter: blur(60px);
-    animation: blinkIt .1s infinite;
-}
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
 
 .flame {
-    display : none;
-    width: 24px;
-    height: 120px;
+    position : absolute;
+    width: 7px;
+    height: 20px;
     left: 50%;
     transform-origin: 50% 100%;
     transform: translateX(-50%);
     bottom: 100%;
     border-radius: 50% 50% 20% 20%;
     
-   
     background: linear-gradient(white 80%, transparent);
-    animation: moveFlame 6s linear infinite, enlargeFlame 5s linear infinite;
+    animation: animateFlame 5s linear alternate infinite;
+    z-index: 2;
 }
+
+@keyframes animateFlame {
+    from {
+        transform: translateX(-50%) rotate(var(--start-angle)) scaleY(var(--start-height));
+        opacity : 0.9;
+    }
+    
+    50% {
+        transform: translateX(-50%) rotate(0deg) scaleY(var(--end-height));
+        opacity : 0.8;
+    }
+
+    to {
+        transform: translateX(-50%) rotate(var(--end-angle)) scaleY(var(--start-height));
+        opacity : 0.9;
+    }
+  }
+
+.blinking-glow {
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    left: 50%;
+    top: -90%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: #ff6000;
+
+    filter : blur(20px);
+
+    animation: blinkIt .1s infinite;
+    z-index : 0;
+}
+
+@keyframes blinkIt {
+    50% { opacity: .90;}
+}
+
+
+.candle-1 {
+    transform: translateX(8px) translateY(-25px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-2 {
+    transform: translateX(-70px) translateY(0px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-3 {
+    transform: translateX(-72px) translateY(20px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-4 {
+    transform: translateX(-55px) translateY(-10px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-5 {
+    transform: translateX(-55px) translateY(30px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-6 {
+    transform: translateX(-40px) translateY(-15px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-7 {
+    transform: translateX(-40px) translateY(35px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-8 {
+    transform: translateX(-25px) translateY(-20px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-9 {
+    transform: translateX(-25px) translateY(40px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-10 {
+    transform: translateX(-10px) translateY(-25px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-11 {
+    transform: translateX(-10px) translateY(42px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-12 {
+    transform: translateX(0px) translateY(10px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-13 {
+    transform: translateX(7px) translateY(42px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-14 {
+    transform: translateX(25px) translateY(-20px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-15 {
+    transform: translateX(25px) translateY(38px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-16 {
+    transform: translateX(40px) translateY(-15px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-17 {
+    transform: translateX(40px) translateY(33px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-18 {
+    transform: translateX(55px) translateY(-10px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-19 {
+    transform: translateX(52px) translateY(28px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-20 {
+    transform: translateX(66px) translateY(0px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+.candle-21 {
+    transform: translateX(64px) translateY(20px);
+    --start-angle: calc(-6deg + 12deg * var(--random));
+    --end-angle: calc(-6deg + 12deg * var(--random));
+    --start-height: calc(1 - 0.2 * var(--random));
+    --end-height: calc(1 + 0.4 * var(--random));
+}
+
+
+
 

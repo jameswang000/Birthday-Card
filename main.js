@@ -120,12 +120,106 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.disabled = true;
                 }, 600);
             })
+            button.addEventListener("click", (e) => {
+                singHappyBirthday();
+            })
         })
+    }
+
+    function addCandles(numCandles) {
+        const candlesContainer = document.querySelector(".candles-container")
+        for(let i = 0; i < numCandles; i++) {
+            currClass = "candle-" + (i + 1);
+            // Create the main container
+            const candle = document.createElement("div");
+            candle.className = "candle";
+            candle.classList.add(currClass);
+
+            // Create the blinking-glow element
+            const blinkingGlow = document.createElement('div');
+            blinkingGlow.className = 'blinking-glow';
+
+            // Create the thread element
+            const thread = document.createElement('div');
+            thread.className = 'thread';
+
+            // Create the blue-glow element
+            const blueGlow = document.createElement('div');
+            blueGlow.className = 'blue-glow';
+
+            // Create the flame element
+            const flame = document.createElement('div');
+            flame.className = 'flame';
+
+            candle.appendChild(blinkingGlow);
+            candle.appendChild(thread);
+            candle.appendChild(blueGlow);
+            candle.appendChild(flame);
+            candle.style.setProperty('--random', Math.random());
+            candlesContainer.appendChild(candle);
+        }
+        console.log(candlesContainer);
+    }
+
+    function addBalloons(numBalloons) {
+        const balloonsContainer = document.querySelector(".balloons-container");
+        for(let i = 0; i < numBalloons; i++) {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.classList.add("balloon-" + (i + 1))
+
+            const balloonHead = document.createElement('div');
+            balloonHead.classList.add('balloon-head');
+
+            const balloonString = document.createElement('div');
+            balloonString.classList.add('balloon-string');
+
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '36');
+            svg.setAttribute('height', '252');
+            svg.setAttribute('viewBox', '0 0 36 252');
+            svg.setAttribute('fill', 'none');
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', 'M24.5 1C22.9 -3.8 -20 68.0001 15 118C50 168 31 201 15 251');
+            path.setAttribute('stroke', '#271B1B');
+            path.setAttribute('stroke-width', '4');
+
+            balloon.style.setProperty("--x1", `${-5 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--x2", `${-5 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--x3", `${-5 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--x4", `${-5 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--x5", `${-5 + 10 * Math.random()}px`);
+
+            balloon.style.setProperty("--y1", `${-10 + 20 * Math.random()}px`);
+            balloon.style.setProperty("--y2", `${-10 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--y3", `${-10 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--y4", `${-10 + 10 * Math.random()}px`);
+            balloon.style.setProperty("--y5", `${-10 + 10 * Math.random()}px`);
+
+            balloon.style.setProperty("--ang1", `${-4 + 8 * Math.random()}deg`);
+            balloon.style.setProperty("--ang2", `${-4 + 8 * Math.random()}deg`);
+            balloon.style.setProperty("--ang3", `${-4 + 8 * Math.random()}deg`);
+            balloon.style.setProperty("--ang4", `${-4 + 8 * Math.random()}deg`);
+            balloon.style.setProperty("--ang5", `${-4 + 8 * Math.random()}deg`);
+
+
+            // Append elements
+            svg.appendChild(path);
+            balloonString.appendChild(svg);
+            balloon.appendChild(balloonHead);
+            balloon.appendChild(balloonString);
+            balloonsContainer.append(balloon);
+
+        }
+        console.log(balloonsContainer);
     }
 
     function main() {
         setupCard();
         setupControlPanel();
+        addCandles(21);
+        addBalloons(3);
     }
 
     main();
