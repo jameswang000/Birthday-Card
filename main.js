@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const paper1 = document.querySelector("#p1");
     const paper2 = document.querySelector("#p2");
 
+    //Transition Logic
+    let currentLocation = 1;
+    let numOfPapers = 2;
+    let maxLocation = numOfPapers + 1;
+    let turningForwards = undefined;
+    let birthdaySequencePlaying = false;
+
     //Event Listeners
     function addPaperEventListeners(paper, index) {
         //paper.style.zIndex = index * -1;
@@ -22,16 +29,18 @@ document.addEventListener("DOMContentLoaded", () => {
             zIndex = parseFloat(window.getComputedStyle(paper).getPropertyValue('z-index'));
             console.log(`Page ${index + 1} has z-index ${zIndex}`)  ;
             */
-            prevButton.disabled = false;
-            nextButton.disabled = false;
+            if(!birthdaySequencePlaying) {
+                if(currentLocation !== 1) {
+                    prevButton.disabled = false;
+                }
+    
+                if(currentLocation !== 3) {
+                    nextButton.disabled = false;
+                }
+            }
         })
     }
 
-    //Transition Logic
-    let currentLocation = 1;
-    let numOfPapers = 2;
-    let maxLocation = numOfPapers + 1;
-    let turningForwards = undefined;
 
 
     function openBook() { 
@@ -110,7 +119,117 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupControlPanel() {
+        const flameContainers = document.querySelectorAll(".flame-container");
+        const blueGlows = document.querySelectorAll(".blue-glow");
+        const flames = document.querySelectorAll(".flame");
+        const blinkingGlows = document.querySelectorAll(".blinking-glow");
+        const focusScreen = document.querySelector("#f2 > .inner-border");
+        const partyContainer = document.querySelector(".party-container");
         const controlButtons = document.querySelectorAll(".control-panel-button");
+        const playButton = document.querySelector(".play-button");
+        const blowoutButton = document.querySelector(".blowout-button");
+
+        playButton.disabled = false;
+        blowoutButton.disabled = true;
+
+        function singHappyBirthday() {
+            let audio = new Audio("audio\\test_sound.m4a");
+            audio.play();
+        }
+
+        function lightCandles() {
+            /*
+            setTimeout(() => {
+                flameContainers.forEach(flameContainer => {
+                    flameContainer.style.display = "block";
+                })
+            }, 1000);
+            */
+
+            flameContainers.forEach(flameContainer => {
+                flameContainer.style.opacity = "1";
+                flameContainer.style.transform = "scaleX(1)"
+                flameContainer.style.transform = "scaleY(1)"
+            });
+            /*
+            blueGlows.forEach((blueGlow) => {
+                blueGlow.style.display = "block";
+            })
+
+            flames.forEach((flame) => {
+                flame.style.display = "block";
+            })
+
+            blinkingGlows.forEach((blinkingGlow) => {
+                blinkingGlow.style.display = "block";
+            })
+            */
+        }
+
+        function dimScreen() {
+            focusScreen.style.boxShadow = "0px 0px 0px 1000px rgba(0, 0, 0, 0.7)";
+            focusScreen.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+            partyContainer.style.backgroundColor = "black";
+            partyContainer.style.border = "2px solid white"
+        }    
+
+        function disableLeftRightButtons() {
+            prevButton.disabled = true;
+            nextButton.disabled = true;
+        }
+
+        function enableBlowoutButton() {
+            birthdaySequencePlaying = true;
+            setTimeout(() => {blowoutButton.disabled = false;}, 1000);
+        }
+
+        function unlightCandles() {
+
+            flameContainers.forEach(flameContainer => {
+                flameContainer.style.opacity = "0";
+                flameContainer.style.transform = "scaleY(0)"
+            });
+
+            /*
+            blueGlows.forEach((blueGlow) => {
+                blueGlow.style.display = "none";
+            })
+
+            flames.forEach((flame) => {
+                flame.style.display = "none";
+            })
+
+            blinkingGlows.forEach((blinkingGlow) => {
+                blinkingGlow.style.display = "none";
+            })
+            */
+        }
+
+        function undimScreen() {
+            setTimeout(() => {
+                focusScreen.style.boxShadow = "";
+                focusScreen.style.backgroundColor = "white";
+                partyContainer.style.backgroundColor = "gray";
+                partyContainer.style.border = "";
+            }, 1000)
+        }
+
+        function enableLeftRightButtons () {
+            setTimeout(() => {
+                prevButton.disabled = false;
+                nextButton.disabled = false;
+                birthdaySequencePlaying = false;
+            }, 1000)
+
+        }
+
+        function enablePlayButton() {
+            setTimeout(() => {
+                playButton.disabled = false;
+            }, 1000)
+
+        }
+
         controlButtons.forEach((button) => {
             button.addEventListener("click", (e) => {
                 e.preventDefault();
@@ -120,10 +239,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     button.disabled = true;
                 }, 600);
             })
-            button.addEventListener("click", (e) => {
-                singHappyBirthday();
-            })
         })
+
+        playButton.addEventListener("click", singHappyBirthday);
+        playButton.addEventListener("click", lightCandles);
+        playButton.addEventListener("click", dimScreen);
+        playButton.addEventListener("click", disableLeftRightButtons);
+        playButton.addEventListener("click", enableBlowoutButton);
+
+        blowoutButton.addEventListener("click", unlightCandles);
+        blowoutButton.addEventListener("click", undimScreen);
+        blowoutButton.addEventListener("click", enableLeftRightButtons);
+        blowoutButton.addEventListener("click", enablePlayButton);
     }
 
     function addCandles(numCandles) {
@@ -134,6 +261,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const candle = document.createElement("div");
             candle.className = "candle";
             candle.classList.add(currClass);
+
+            const flameContainer = document.createElement("div");
+            flameContainer.classList.add("flame-container");
 
             // Create the blinking-glow element
             const blinkingGlow = document.createElement('div');
@@ -151,10 +281,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const flame = document.createElement('div');
             flame.className = 'flame';
 
-            candle.appendChild(blinkingGlow);
+            flameContainer.appendChild(blinkingGlow);
+            flameContainer.appendChild(blueGlow);
+            flameContainer.appendChild(flame);
+
             candle.appendChild(thread);
-            candle.appendChild(blueGlow);
-            candle.appendChild(flame);
+            candle.appendChild(flameContainer);
+
             candle.style.setProperty('--random', Math.random());
             candlesContainer.appendChild(candle);
         }
@@ -182,7 +315,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             path.setAttribute('d', 'M24.5 1C22.9 -3.8 -20 68.0001 15 118C50 168 31 201 15 251');
-            path.setAttribute('stroke', '#271B1B');
+            path.setAttribute('stroke', 'white');
             path.setAttribute('stroke-width', '4');
 
             balloon.style.setProperty("--x1", `${-5 + 10 * Math.random()}px`);
@@ -217,9 +350,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function main() {
         setupCard();
-        setupControlPanel();
         addCandles(21);
         addBalloons(3);
+        setupControlPanel();
     }
 
     main();
