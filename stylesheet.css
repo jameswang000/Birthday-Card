@@ -692,7 +692,7 @@ p.birthday-title > span {
     height : 100%;
     position : relative;
     --cake-color : #FFC0CB;
-    --icing-color : #98FF98;
+    --icing-color : #F3E5AB;
     --candle-color : #FFA07A;
     --cake-bottom : 80px;
     z-index : 3;
@@ -797,7 +797,7 @@ p.birthday-title > span {
     bottom : calc(var(--cake-bottom) + 33px * 2 + 3px);
     z-index: 4;
     
-    box-shadow: 0 2px 2px 2px #89E589;
+    box-shadow: 0 2px 2px 2px #DACE99;
 
 }
 
@@ -811,9 +811,9 @@ p.birthday-title > span {
 
     background-color: var(--icing-color);
     box-shadow:
-        0 0 4px #A6FFA6, /* lighten(#98FF98, 5%) */
-        0 0 5px #A6FFA6, /* lighten(#98FF98, 5%) */
-        0 0 6px #A6FFA6; /* lighten(#98FF98, 5%) */
+        0 0 4px #F3E6AF, /* lighten(#98FF98, 5%) */
+        0 0 5px #F3E6AF, /* lighten(#98FF98, 5%) */
+        0 0 6px #F3E6AF; /* lighten(#98FF98, 5%) */
     border-radius: 50%;
     z-index: 5;
 }
