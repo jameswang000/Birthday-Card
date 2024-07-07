@@ -386,7 +386,7 @@ p.birthday-title > span {
     position: absolute;
     z-index : 0;
     left: -50px;
-    bottom: -50px;
+    bottom: -47px;
     transform: scale(0.7);
 
 }
@@ -395,7 +395,7 @@ p.birthday-title > span {
     position: absolute;
     z-index : 0;
     left: -50px;
-    top: -50px;
+    top: -47px;
     transform: scale(0.7) rotateX(180deg);
 
 }
@@ -404,7 +404,7 @@ p.birthday-title > span {
     position: absolute;
     z-index : 0;
     right: -50px;
-    bottom: -50px;
+    bottom: -47px;
     transform: scale(0.7) rotateY(180deg);
 
 }
@@ -413,7 +413,7 @@ p.birthday-title > span {
     position: absolute;
     z-index : 0;
     right: -50px;
-    top: -50px;
+    top: -47px;
     transform: scale(0.7) rotateX(180deg) rotateY(180deg);
 }
 
@@ -611,6 +611,7 @@ p.birthday-title > span {
 }
 
 .balloon-2 {
+    display : none;
     left : 120px;
     top : 30px;
 }

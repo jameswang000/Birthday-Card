@@ -133,8 +133,14 @@ document.addEventListener("DOMContentLoaded", () => {
         blowoutButton.disabled = true;
 
         function singHappyBirthday() {
-            let audio = new Audio("audio\\test_sound.m4a");
+            let audio = new Audio("audio\\happy_birthday_audio.mp3");
+            let song  = new Audio("audio\\happy_birthday_singing.m4a");
+            audio.volume = 0.4;
             audio.play();
+            setTimeout(() => {
+                song.play();
+            }, 8500);
+            
         }
 
         function lightCandles() {
@@ -180,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function enableBlowoutButton() {
             birthdaySequencePlaying = true;
-            setTimeout(() => {blowoutButton.disabled = false;}, 1000);
+            setTimeout(() => {blowoutButton.disabled = false;}, 44000);
         }
 
         function unlightCandles() {
