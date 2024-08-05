@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
             audio.play();
             setTimeout(() => {
                 song.play();
-            }, 8500);
+            }, 8225);
             
         }
 
